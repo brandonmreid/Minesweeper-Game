@@ -1,7 +1,7 @@
 #Written by Brandon Reid
 
 import functions, sys, pickle
-SEE_BOMBBOARD = False
+SEE_BOMBBOARD = True
 
 #variables
 numRows = 0
@@ -13,6 +13,7 @@ bombBoard = []
 bombs = 0
 menuChoice = 'F'
 menuChoice2 = 'g'
+difficultyChoice = ''
 
 #Welcome
 print('''Welcome to MineSweeper v 1.0!
@@ -20,6 +21,7 @@ print('''Welcome to MineSweeper v 1.0!
 When playing for the first time, create a new game. If you have played already, you can continue where you left off.''')
 #Prompt for new game or continue
 menuChoice = functions.menuPrompt()  
+difficultyChoice = functions.diffPrompt()
 if (menuChoice == 'n' or menuChoice == 'N'):
     print("New game created!")
     functions.mainMenu()
@@ -27,7 +29,7 @@ if (menuChoice == 'n' or menuChoice == 'N'):
     numCols = functions.colPrompt()
     board = functions.boardMaker(numRows, numCols)
     bombBoard = functions.boardMaker(numRows, numCols)
-    bombBoard = functions.bombPlacer(bombBoard)
+    bombBoard = functions.bombPlacer(bombBoard, difficultyChoice)
     functions.boardPrinter(board)
     if SEE_BOMBBOARD:
         functions.boardPrinter(bombBoard)

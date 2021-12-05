@@ -1,19 +1,32 @@
 #Written by Brandon Reid
 
 import random, sys, os
-DEBUG = False
+DEBUG = True
 numInputs = 0
 
 #Boards
 
-def bombPlacer(board):    
+
+#take difficulty level
+#def bombPlacer(board, difficulty)
+def bombPlacer(board, difficulty):    
     #variables
     rows = len(board)
     cols = len(board[0])
     area = rows * cols    
-    numBombs = int(area / 4)
     numBombsPlaced = 0    
     bombBoard = board[:]
+    
+    numBombs = int(area / 4)
+
+    
+    if difficulty == "Easy" or difficulty == "easy":
+        numBombs = int(area / 8)
+    elif difficulty == "Medium" or difficulty == "medium":
+        numBombs = int(area / 6)
+    else:
+        numBombs = int(area / 4)
+
 
     if DEBUG:
         print("Num rows: ", rows)
@@ -96,6 +109,19 @@ def colPrompt():
             print("Error! Not a valid integar. Try Again.")
     return int(numCols)
 
+def diffPrompt():
+    check = True
+    choice = ''
+    while check == True:
+        choice = input('What difficulty level would you like to play at?: ' )
+            
+        if choice == 'Easy' or choice == 'easy' or choice == 'Medium'  or choice == 'medium' or choice == 'Hard' or choice == 'hard':
+            break
+        else:  
+            print("Erorr! Not a valid string  ")   
+
+    return choice
+
 #Function to gather player column choice
 def xPrompt(col):
     check = False
@@ -103,6 +129,7 @@ def xPrompt(col):
     while check == False:
         colChoice = input("Which column would you like to select: ")
         try:
+            val = int()
             val = int(colChoice)
             if val > 0 and val <= col:
                 break
